@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
@@ -17,8 +17,7 @@ export class AuthService {
       this.prisma.usuario.findUnique({ where: { cpf: dto.cpf } }),
     ]);
 
-    if (emailExists) throw new ConflictException('Email já cadastrado.');
-    if (cpfExists) throw new ConflictException('CPF já cadastrado.');
+    if (emailExists || cpfExists) throw new BadRequestException({ message: 'Dados inválidos' });
 
     const senha_hash = await bcrypt.hash(dto.senha, 10);
 
@@ -63,12 +62,12 @@ export class AuthService {
       where: { refresh_token: token },
     });
 
-    if (!user) throw new UnauthorizedException();
+    if (!user) throw new UnauthorizedException({ message: 'Não autorizado' });
 
     try {
       this.jwtService.verify(token, { secret: process.env.JWT_REFRESH_SECRET });
     } catch {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException({ message: 'Não autorizado' });
     }
 
     const payload = { sub: user.id, email: user.email, role: user.role };

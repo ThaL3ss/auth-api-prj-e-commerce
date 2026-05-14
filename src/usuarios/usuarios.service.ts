@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 
@@ -20,7 +20,7 @@ export class UsuariosService {
         where: { email: dto.email },
       });
       if (existing && existing.id !== id) {
-        throw new ConflictException('Email já está em uso por outro usuário.');
+        throw new BadRequestException({ message: 'Dados inválidos' });
       }
     }
 

@@ -23,7 +23,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async login(@Body() dto: LoginDto) {
     const user = await this.authService.validateUser(dto.email, dto.senha);
-    if (!user) throw new UnauthorizedException('Credenciais inválidas.');
+    if (!user) throw new UnauthorizedException({ message: 'Credenciais inválidas' });
     return this.authService.login(user);
   }
 

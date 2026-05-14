@@ -7,6 +7,6 @@ export class UpdateUsuarioDto {
   nome?: string;
 
   @IsOptional()
-  @IsEmail({}, { message: 'Email inválido.' })
+  @IsEmail()
   email?: string;
 }

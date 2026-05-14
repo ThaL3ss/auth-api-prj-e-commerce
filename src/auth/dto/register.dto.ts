@@ -5,15 +5,15 @@ export class RegisterDto {
   @MinLength(1)
   nome: string;
 
-  @IsEmail({}, { message: 'Email inválido.' })
+  @IsEmail()
   email: string;
 
   @IsString()
-  @Length(11, 11, { message: 'CPF deve ter exatamente 11 dígitos.' })
-  @Matches(/^\d{11}$/, { message: 'CPF deve conter apenas dígitos.' })
+  @Length(11, 11)
+  @Matches(/^\d{11}$/)
   cpf: string;
 
   @IsString()
-  @MinLength(8, { message: 'Senha deve ter no mínimo 8 caracteres.' })
+  @MinLength(8)
   senha: string;
 }
