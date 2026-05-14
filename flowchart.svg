@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 640" font-family="'Courier New', Consolas, monospace">
+  <defs>
+    <marker id="ag" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="7" markerHeight="5" orient="auto">
+      <polygon points="0,0 10,3.5 0,7" fill="#6abf6a"/>
+    </marker>
+    <marker id="ao" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="7" markerHeight="5" orient="auto">
+      <polygon points="0,0 10,3.5 0,7" fill="#bf8a4a"/>
+    </marker>
+    <marker id="ao-r" viewBox="0 0 10 7" refX="1" refY="3.5" markerWidth="7" markerHeight="5" orient="auto-start-reverse">
+      <polygon points="0,0 10,3.5 0,7" fill="#bf8a4a"/>
+    </marker>
+    <marker id="ay" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="7" markerHeight="5" orient="auto">
+      <polygon points="0,0 10,3.5 0,7" fill="#ffd700"/>
+    </marker>
+    <marker id="agr" viewBox="0 0 10 7" refX="9" refY="3.5" markerWidth="7" markerHeight="5" orient="auto">
+      <polygon points="0,0 10,3.5 0,7" fill="#555"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="980" height="640" fill="#0d1117" rx="12"/>
+
+  <!-- ═══════════════════════════════════════
+       CLIENT
+       ═══════════════════════════════════════ -->
+  <rect x="388" y="16" width="204" height="54" rx="27" fill="#1a2d1a" stroke="#6abf6a" stroke-width="2"/>
+  <text x="490" y="40" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">🌐 Cliente</text>
+  <text x="490" y="58" text-anchor="middle" fill="#7abf7a" font-size="11">Browser / Mobile / Insomnia</text>
+
+  <!-- Client → Gateway -->
+  <path d="M418,70 C360,112 235,145 190,162" stroke="#6abf6a" stroke-width="1.5" fill="none" marker-end="url(#ag)"/>
+  <text x="300" y="106" text-anchor="middle" fill="#6abf6a" font-size="11">HTTP</text>
+
+  <!-- ═══════════════════════════════════════
+       GATEWAY BOX
+       ═══════════════════════════════════════ -->
+  <rect x="18" y="163" width="270" height="156" rx="8" fill="#0d1f0d" stroke="#6abf6a" stroke-width="2"/>
+  <text x="153" y="182" text-anchor="middle" fill="#6abf6a" font-size="12" font-weight="bold">API Gateway — :3000</text>
+
+  <!-- route_configs sub-box -->
+  <rect x="32" y="192" width="110" height="64" rx="4" fill="#091309" stroke="#3a6a3a" stroke-width="1"/>
+  <text x="87" y="210" text-anchor="middle" fill="#7abb7a" font-size="10" font-weight="bold">route_configs</text>
+  <text x="87" y="226" text-anchor="middle" fill="#4a7a4a" font-size="9">path</text>
+  <text x="87" y="240" text-anchor="middle" fill="#4a7a4a" font-size="9">targetUrl</text>
+  <text x="87" y="254" text-anchor="middle" fill="#4a7a4a" font-size="9">requiresAuth</text>
+
+  <line x1="142" y1="224" x2="151" y2="224" stroke="#6abf6a" stroke-width="1" marker-end="url(#ag)"/>
+
+  <!-- proxy sub-box -->
+  <rect x="151" y="192" width="124" height="64" rx="4" fill="#091309" stroke="#3a6a3a" stroke-width="1"/>
+  <text x="213" y="210" text-anchor="middle" fill="#7abb7a" font-size="10" font-weight="bold">Proxy via axios</text>
+  <text x="213" y="226" text-anchor="middle" fill="#4a7a4a" font-size="9">repassa headers</text>
+  <text x="213" y="242" text-anchor="middle" fill="#4a7a4a" font-size="9">+ body originais</text>
+
+  <!-- gateway note -->
+  <text x="153" y="272" text-anchor="middle" fill="#3a5a3a" font-size="10">não valida token internamente</text>
+  <text x="153" y="286" text-anchor="middle" fill="#3a5a3a" font-size="10">só verifica se header existe</text>
+  <text x="153" y="300" text-anchor="middle" fill="#3a5a3a" font-size="10">validação real → JwtAuthGuard</text>
+
+  <!-- Gateway → auth-api -->
+  <path d="M288,232 L355,263" stroke="#6abf6a" stroke-width="1.5" fill="none" marker-end="url(#ag)"/>
+  <text x="318" y="237" text-anchor="middle" fill="#6abf6a" font-size="10">roteia</text>
+
+  <!-- Gateway → Catalog -->
+  <path d="M98,319 L110,487" stroke="#6abf6a" stroke-width="1.5" fill="none" marker-end="url(#ag)"/>
+
+  <!-- Gateway → Orders -->
+  <path d="M175,319 L378,487" stroke="#6abf6a" stroke-width="1.5" fill="none" marker-end="url(#ag)"/>
+
+  <!-- ═══════════════════════════════════════
+       AUTH-API BOX
+       ═══════════════════════════════════════ -->
+  <rect x="355" y="140" width="320" height="302" rx="8" fill="#0c2035" stroke="#4a9eff" stroke-width="2.5"/>
+  <text x="515" y="162" text-anchor="middle" fill="#4a9eff" font-size="12" font-weight="bold">auth-api — :3006  ◀ ESTE SERVIÇO</text>
+
+  <!-- Public endpoints -->
+  <rect x="369" y="172" width="292" height="72" rx="4" fill="#071525" stroke="#4a9eff" stroke-width="1"/>
+  <text x="383" y="191" fill="#88bbff" font-size="11" font-weight="bold">🔓 Públicos</text>
+  <text x="383" y="208" fill="#5580aa" font-size="10">POST /auth/register       → 201</text>
+  <text x="383" y="223" fill="#5580aa" font-size="10">POST /auth/login          → 200</text>
+  <text x="383" y="238" fill="#5580aa" font-size="10">POST /auth/refresh-token  → 501 ⏳</text>
+
+  <!-- JWT-protected endpoints -->
+  <rect x="369" y="253" width="292" height="72" rx="4" fill="#071525" stroke="#4a9eff" stroke-width="1"/>
+  <text x="383" y="272" fill="#88bbff" font-size="11" font-weight="bold">🔐 JWT Guard</text>
+  <text x="383" y="289" fill="#5580aa" font-size="10">GET    /usuarios/me       → 200</text>
+  <text x="383" y="304" fill="#5580aa" font-size="10">PUT    /usuarios/me       → 200</text>
+  <text x="383" y="319" fill="#5580aa" font-size="10">DELETE /usuarios/me       → 200</text>
+
+  <!-- Internal endpoints -->
+  <rect x="369" y="334" width="292" height="82" rx="4" fill="#071525" stroke="#ffd700" stroke-width="1"/>
+  <text x="383" y="354" fill="#ffd700" font-size="11" font-weight="bold">🔑 X-Internal-Key</text>
+  <text x="383" y="371" fill="#aa8822" font-size="10">POST /internal/auth/validate-token → 200</text>
+  <text x="383" y="387" fill="#aa8822" font-size="10">GET  /internal/usuarios/:id         → 200</text>
+  <text x="383" y="403" fill="#664400" font-size="10">direto, sem gateway</text>
+  <text x="383" y="416" fill="#664400" font-size="10">retorna { valid, userId, role } / dados</text>
+
+  <!-- ═══════════════════════════════════════
+       EXTERNAL SERVICES
+       ═══════════════════════════════════════ -->
+  <rect x="758" y="172" width="206" height="84" rx="8" fill="#1a1a1a" stroke="#555" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="861" y="197" text-anchor="middle" fill="#999" font-size="12" font-weight="bold">Outros Serviços</text>
+  <text x="861" y="216" text-anchor="middle" fill="#666" font-size="10">MS Pedidos / Catálogo</text>
+  <text x="861" y="233" text-anchor="middle" fill="#666" font-size="10">uso direto sem gateway</text>
+  <text x="861" y="250" text-anchor="middle" fill="#ffd700" font-size="10">X-Internal-Key</text>
+
+  <!-- ExtSvc → auth-api Internal (dashed yellow) -->
+  <path d="M758,242 L664,375" stroke="#ffd700" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#ay)"/>
+  <text x="728" y="298" text-anchor="middle" fill="#886600" font-size="10" transform="rotate(-55,728,298)">X-Internal-Key</text>
+
+  <!-- ═══════════════════════════════════════
+       auth-api ↔ MySQL  (bidirectional)
+       ═══════════════════════════════════════ -->
+  <!-- forward: auth-api → MySQL -->
+  <path d="M680,320 L793,473" stroke="#bf8a4a" stroke-width="1.5" fill="none" marker-end="url(#ao)"/>
+  <!-- return: MySQL → auth-api (offset by a few px) -->
+  <path d="M788,473 L676,326" stroke="#bf8a4a" stroke-width="1" fill="none" marker-end="url(#ao)" stroke-dasharray="3,2" opacity="0.6"/>
+  <text x="762" y="380" text-anchor="middle" fill="#bf8a4a" font-size="10">SELECT / INSERT</text>
+  <text x="762" y="394" text-anchor="middle" fill="#bf8a4a" font-size="10">UPDATE / DELETE</text>
+
+  <!-- ═══════════════════════════════════════
+       CATALOG BOX
+       ═══════════════════════════════════════ -->
+  <rect x="18" y="489" width="210" height="90" rx="8" fill="#161616" stroke="#555" stroke-width="1.5"/>
+  <text x="123" y="511" text-anchor="middle" fill="#bbb" font-size="12" font-weight="bold">Catálogo-Produto</text>
+  <text x="123" y="530" text-anchor="middle" fill="#666" font-size="10">/produto    /categorias</text>
+  <text x="123" y="547" text-anchor="middle" fill="#666" font-size="10">/estoque    /imagem</text>
+  <text x="123" y="564" text-anchor="middle" fill="#444" font-size="9">Prisma + MySQL</text>
+
+  <!-- Catalog → MySQL: L-shaped path above Orders box -->
+  <path d="M228,491 L228,466 L793,466 L793,473" stroke="#bf8a4a" stroke-width="1.5" fill="none" marker-end="url(#ao)"/>
+
+  <!-- ═══════════════════════════════════════
+       ORDERS BOX
+       ═══════════════════════════════════════ -->
+  <rect x="274" y="489" width="268" height="90" rx="8" fill="#161616" stroke="#555" stroke-width="1.5"/>
+  <text x="408" y="511" text-anchor="middle" fill="#bbb" font-size="12" font-weight="bold">MS Pedidos &amp; Pagamentos</text>
+  <text x="408" y="530" text-anchor="middle" fill="#666" font-size="10">/metodos_de_pagamento</text>
+  <text x="408" y="547" text-anchor="middle" fill="#666" font-size="10">pedido.usuario_uuid CHAR(36)</text>
+  <text x="408" y="564" text-anchor="middle" fill="#444" font-size="9">referência por valor, sem FK entre bancos</text>
+
+  <!-- Orders → auth-api dashed (busca dados de usuário) -->
+  <path d="M430,489 C450,455 495,440 515,436" stroke="#555" stroke-width="1.5" fill="none" stroke-dasharray="4,3" marker-end="url(#agr)"/>
+  <text x="460" y="456" text-anchor="middle" fill="#555" font-size="9">busca dados</text>
+  <text x="460" y="468" text-anchor="middle" fill="#555" font-size="9">por UUID</text>
+
+  <!-- Orders → MySQL -->
+  <path d="M542,530 L755,520" stroke="#bf8a4a" stroke-width="1.5" fill="none" marker-end="url(#ao)"/>
+
+  <!-- ═══════════════════════════════════════
+       MYSQL CYLINDER
+       ═══════════════════════════════════════ -->
+  <ellipse cx="830" cy="487" rx="82" ry="21" fill="#1e1008" stroke="#bf8a4a" stroke-width="2"/>
+  <rect x="748" y="487" width="164" height="105" fill="#1e1008"/>
+  <line x1="748" y1="487" x2="748" y2="592" stroke="#bf8a4a" stroke-width="2"/>
+  <line x1="912" y1="487" x2="912" y2="592" stroke="#bf8a4a" stroke-width="2"/>
+  <ellipse cx="830" cy="592" rx="82" ry="21" fill="#1e1008" stroke="#bf8a4a" stroke-width="2"/>
+  <text x="830" y="537" text-anchor="middle" fill="#bf8a4a" font-size="16" font-weight="bold">MySQL</text>
+  <text x="830" y="558" text-anchor="middle" fill="#7a5a3a" font-size="10">banco compartilhado</text>
+  <text x="830" y="575" text-anchor="middle" fill="#7a5a3a" font-size="10">por todos os serviços</text>
+
+  <!-- ═══════════════════════════════════════
+       LEGEND
+       ═══════════════════════════════════════ -->
+  <rect x="18" y="597" width="340" height="34" rx="6" fill="#111" stroke="#333" stroke-width="1"/>
+  <line x1="30" y1="614" x2="55" y2="614" stroke="#6abf6a" stroke-width="1.5" marker-end="url(#ag)"/>
+  <text x="60" y="618" fill="#6abf6a" font-size="10">Requisição via gateway</text>
+  <line x1="145" y1="614" x2="170" y2="614" stroke="#bf8a4a" stroke-width="1.5" marker-end="url(#ao)"/>
+  <text x="175" y="618" fill="#bf8a4a" font-size="10">Acesso ao banco</text>
+  <line x1="258" y1="614" x2="283" y2="614" stroke="#ffd700" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#ay)"/>
+  <text x="288" y="618" fill="#ffd700" font-size="10">Direto (API Key)</text>
+</svg>
