@@ -11,6 +11,6 @@ async function bootstrap() {
       exceptionFactory: () => new BadRequestException({ message: 'Dados inválidos' }),
     }),
   );
-  await app.listen(process.env.PORT ?? 3006);
+  await app.listen(process.env.PORT ?? 3040);
 }
 bootstrap();

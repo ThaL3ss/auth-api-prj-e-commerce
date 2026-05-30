@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Put, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Put, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { ChangeSenhaDto } from './dto/change-senha.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { UsuariosService } from './usuarios.service';
 
@@ -16,6 +17,11 @@ export class UsuariosController {
   @Put('me')
   async update(@Req() req: any, @Body() dto: UpdateUsuarioDto) {
     return this.usuariosService.updateMe(req.user.sub, dto);
+  }
+
+  @Patch('me/senha')
+  async changeSenha(@Req() req: any, @Body() dto: ChangeSenhaDto) {
+    return this.usuariosService.changeSenha(req.user.sub, dto);
   }
 
   @Delete('me')

@@ -1,5 +1,7 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
+import { ChangeSenhaDto } from './dto/change-senha.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 
 @Injectable()
@@ -30,6 +32,19 @@ export class UsuariosService {
     });
 
     return updated;
+  }
+
+  async changeSenha(id: string, dto: ChangeSenhaDto) {
+    const user = await this.prisma.usuario.findUnique({ where: { id } });
+    if (!user) throw new NotFoundException('Usuário não encontrado.');
+
+    const senhaValida = await bcrypt.compare(dto.senha_atual, user.senha_hash);
+    if (!senhaValida) throw new UnauthorizedException('Senha atual incorreta.');
+
+    const senha_hash = await bcrypt.hash(dto.nova_senha, 10);
+    await this.prisma.usuario.update({ where: { id }, data: { senha_hash } });
+
+    return { message: 'Senha alterada com sucesso.' };
   }
 
   async deleteMe(id: string) {
